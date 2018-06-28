@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Add Trip</title>
+    </head>
+
+    <body>
+        <h1>Hi! {{request.session.fullname}}</h1>
+        <!-- <p>Id: {{request.session.id}}</p> -->
+        <br>
+        <button><a href="/dashboard">Home</a></button>
+        <button><a href="/logout">Logout</a></button>
+
+        <h2>Add a Trip</h2>
+
+        <form class="" action="/process" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="addproduct">
+            Item/Product: <input type="text" name="item" id=""><br><br>
+            <input type="submit" name="" value="Add" id="">            
+        </form>
+        {% if messages %}
+            {% for message in messages %}
+                <p >{{ message }}</p>
+            {% endfor %}
+        {% endif %}    
+    </body>
+</html>

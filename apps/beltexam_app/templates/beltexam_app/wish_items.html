@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Destination</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+    </style>
+
+</head>
+<body>
+        <h1>Hi! {{request.session.fullname}}</h1><br>
+        
+        <button><a href="/dashboard">Home</a></button>
+        <button><a href="/logout">Logout</a></button>
+
+    <h2>{{ wishinfo.item }} is added by: {{ wishinfo.person.fullname }}</h2>
+    <h3>Users who also added this product/item under their wish list:</h3>
+
+        {% for x in wishpeople %}
+            <p>{{ x.wanter.fullname }}</p>
+        {% endfor %}
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Index Page</title>
+        <style>
+            div {
+                vertical-align: top;
+                display: inline-block;
+                border: 1px solid black;
+                width: auto;
+                height: auto;
+                padding: 10px;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Welcome!</h1>
+
+
+        <div>
+            <h2>Register</h2>
+            <form class="" action="/process" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="register">
+                <input type="text" name="fullname" placeholder="FullName"><br>
+                <input type="text" name="username" placeholder="Username"><br>
+                <input type="password" name="password" placeholder="Password"><br>
+                <input type="password" name="confirm_pw" placeholder="Confirm Password"><br>
+                Date Hired:<input type="date" name="start" id=""><br>
+                <input type="submit" name="" value="Register">
+            </form>
+
+        </div>
+
+        <div>
+            <h2>Login</h2>
+            <form class="" action="/process" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="login">
+                <input type="text" name="username" placeholder="Username"><br>
+                <input type="password" name="password" placeholder="Password"><br>
+                <input type="submit" name="" value="Login">
+            </form>
+            <br>
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <p >{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    </body>
+</html>

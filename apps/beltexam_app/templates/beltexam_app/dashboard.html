@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Dash board</title>
+
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+            
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Hi! {{request.session.fullname}}</h1>
+        <!-- <p>Id: {{request.session.id}}</p> -->
+        <br>
+        
+        <button><a href="/add">Add Item</a></button>
+        <button><a href="/logout">Logout</a></button>
+        
+        <h3>Your Wish List:</h3>
+
+        <table>
+            <tr> 
+              <th>Item</th>
+              <th>Added by</th>
+              <th>Date Added</th>
+              <th>Action</th>
+            </tr>
+            {% for i in mywish %}
+            <tr> 
+                <th><a href="/wish_items/{{ i.id }}">{{ i.item }}</a></th>
+                <th>{{ i.person.fullname }}</th>
+                <th>{{ i.created_at }}</th>
+                {% if i.person.id == request.session.id %}
+                <th><a href="/remove/{{ i.id }}">Remove</a></th>
+                    {% else %}
+                <th><a href="/removewish/{{ i.id }}">Remove from my Wishlist</a></th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+
+        <h2>Other User's Wish List</h2>
+        
+        <table>
+            <tr> 
+              <th>Item</th>
+              <th>Added by</th>
+              <th>Date Added</th>
+              <th>Action</th>
+            </tr>
+
+            {% for i in otherwish %}
+            <tr> 
+                <th><a href="/wish_items/{{ i.id }}">{{ i.item }}</a></th>
+                <th>{{ i.person.fullname }}</th>
+                <th>{{ i.created_at }}</th>
+                <th><a href="/wish/{{ i.id }}">Add to my Wishlist</a></th>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+    </body>
+</html>
